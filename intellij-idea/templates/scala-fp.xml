@@ -1,0 +1,165 @@
+<templateSet group="scala-fp">
+  <template name="adt" value="sealed trait $TYPE_NAME$&#10;object $TYPE_NAME$ {&#10;  $CLASS_OR_OBJECT1$ $DATA_NAME1$ extends $TYPE_NAME$&#10;  $CLASS_OR_OBJECT2$ $DATA_NAME2$ extends $TYPE_NAME$&#10;&#10;  def $CONSTRUCTOR_NAME1$: $TYPE_NAME$ = $DATA_CONSTRUCTION1$&#10;  def $CONSTRUCTOR_NAME2$: $TYPE_NAME$ = $DATA_CONSTRUCTION2$&#10;}&#10;" description="" toReformat="false" toShortenFQNames="true">
+    <variable name="TYPE_NAME" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="CLASS_OR_OBJECT1" expression="enum(&quot;final case class&quot;,&quot;case object&quot;)" defaultValue="" alwaysStopAt="true" />
+    <variable name="DATA_NAME1" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="CLASS_OR_OBJECT2" expression="enum(&quot;final case class&quot;,&quot;case object&quot;)" defaultValue="" alwaysStopAt="true" />
+    <variable name="DATA_NAME2" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="CONSTRUCTOR_NAME1" expression="" defaultValue="decapitalize(DATA_NAME1)" alwaysStopAt="false" />
+    <variable name="DATA_CONSTRUCTION1" expression="" defaultValue="groovyScript(&quot;def extractNames(s) { parenStart = s.indexOf('('); if (parenStart &lt; 0) { return s } else { name = s.substring(0, parenStart); parenEnd = s.indexOf(')'); params = s.substring(parenStart + 1, parenEnd).split(\&quot;,\&quot;).collect { it.trim() }; return name + \&quot;(\&quot; + params.collect { it.split(':').getAt(0) }.join(', ') + \&quot;)\&quot;; } }\n return extractNames(_1);&quot;, DATA_NAME1)" alwaysStopAt="false" />
+    <variable name="CONSTRUCTOR_NAME2" expression="" defaultValue="decapitalize(DATA_NAME2)" alwaysStopAt="false" />
+    <variable name="DATA_CONSTRUCTION2" expression="" defaultValue="groovyScript(&quot;def extractNames(s) { parenStart = s.indexOf('('); if (parenStart &lt; 0) { return s } else { name = s.substring(0, parenStart); parenEnd = s.indexOf(')'); params = s.substring(parenStart + 1, parenEnd).split(\&quot;,\&quot;).collect { it.trim() }; return name + \&quot;(\&quot; + params.collect { it.split(':').getAt(0) }.join(', ') + \&quot;)\&quot;; } }\n return extractNames(_1);&quot;, DATA_NAME2)" alwaysStopAt="false" />
+    <context>
+      <option name="SCALA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="adtData" value="$CLASS_OR_OBJECT$ $DATA_NAME$ extends $TYPE_NAME$&#10;def $CONSTRUCTOR_NAME$: $TYPE_NAME$ = $DATA_CONSTRUCTION$" description="" toReformat="false" toShortenFQNames="true">
+    <variable name="CLASS_OR_OBJECT" expression="enum(&quot;final case class&quot;,&quot;case object&quot;)" defaultValue="" alwaysStopAt="true" />
+    <variable name="DATA_NAME" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="TYPE_NAME" expression="" defaultValue="groovyScript(&quot;return _1.findAll { c -&gt; c != '$' }.join('');&quot;, className())" alwaysStopAt="false" />
+    <variable name="CONSTRUCTOR_NAME" expression="" defaultValue="decapitalize(DATA_NAME)" alwaysStopAt="false" />
+    <variable name="DATA_CONSTRUCTION" expression="" defaultValue="groovyScript(&quot;def extractNames(s) { parenStart = s.indexOf('('); if (parenStart &lt; 0) { return s } else { name = s.substring(0, parenStart); parenEnd = s.indexOf(')'); params = s.substring(parenStart + 1, parenEnd).split(\&quot;,\&quot;).collect { it.trim() }; return name + \&quot;(\&quot; + params.collect { it.split(':').getAt(0) }.join(', ') + \&quot;)\&quot;; } }\n return extractNames(_1);&quot;, DATA_NAME)" alwaysStopAt="false" />
+    <context>
+      <option name="SCALA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="circeDeriving" value="implicit val $TYPE_VAL_NAME$Encoder: io.circe.Encoder[$TYPE_NAME$] = deriving&#10;implicit val $TYPE_VAL_NAME$Decoder: io.circe.Decoder[$TYPE_NAME$] = deriving" description="" toReformat="false" toShortenFQNames="true">
+    <variable name="TYPE_VAL_NAME" expression="" defaultValue="decapitalize(TYPE_NAME)" alwaysStopAt="false" />
+    <variable name="TYPE_NAME" expression="" defaultValue="groovyScript(&quot;return _1.findAll { c -&gt; c != '$' }.join('');&quot;, className())" alwaysStopAt="false" />
+    <context>
+      <option name="SCALA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="eqDeriving" value="implicit val $TYPE_VAL_NAME$Eq: cats.Eq[$TYPE_NAME$] = deriving" description="" toReformat="false" toShortenFQNames="true">
+    <variable name="TYPE_VAL_NAME" expression="" defaultValue="decapitalize(TYPE_NAME)" alwaysStopAt="false" />
+    <variable name="TYPE_NAME" expression="" defaultValue="groovyScript(&quot;return _1.findAll { c -&gt; c != '$' }.join('');&quot;, className())" alwaysStopAt="false" />
+    <context>
+      <option name="SCALA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="newsubtype" value="@io.estatico.newtype.macros.newsubtype case class $NAME$(value: $VALUE_TYPE$)&#10;" description="newtype for Scala" toReformat="false" toShortenFQNames="true">
+    <variable name="NAME" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="VALUE_TYPE" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="SCALA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="newtype" value="@io.estatico.newtype.macros.newtype case class $NAME$(value: $VALUE_TYPE$)&#10;" description="newtype for Scala" toReformat="false" toShortenFQNames="true">
+    <variable name="NAME" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="VALUE_TYPE" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="SCALA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="pureConfigDeriving" value="implicit val $TYPE_VAL_NAME$ConfigReader: pureconfig.ConfigReader[$TYPE_NAME$] = deriving&#10;" description="" toReformat="false" toShortenFQNames="true">
+    <variable name="TYPE_VAL_NAME" expression="" defaultValue="decapitalize(TYPE_NAME)" alwaysStopAt="false" />
+    <variable name="TYPE_NAME" expression="" defaultValue="groovyScript(&quot;return _1.findAll { c -&gt; c != '$' }.join('');&quot;, className())" alwaysStopAt="false" />
+    <context>
+      <option name="SCALA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="showDeriving" value="implicit val $TYPE_VAL_NAME$Show: cats.Show[$TYPE_NAME$] = deriving" description="" toReformat="false" toShortenFQNames="true">
+    <variable name="TYPE_VAL_NAME" expression="" defaultValue="decapitalize(TYPE_NAME)" alwaysStopAt="false" />
+    <variable name="TYPE_NAME" expression="" defaultValue="groovyScript(&quot;return _1.findAll { c -&gt; c != '$' }.join('');&quot;, className())" alwaysStopAt="false" />
+    <context>
+      <option name="SCALA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="valueCaseClass" value="final case class $NAME$($VALUE$: $VALUE_TYPE$) extends AnyVal&#10;" description="" toReformat="false" toShortenFQNames="true">
+    <variable name="NAME" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="VALUE" expression="" defaultValue="decapitalize(NAME)" alwaysStopAt="true" />
+    <variable name="VALUE_TYPE" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="SCALA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="valueClass" value="final class $NAME$(val $VALUE$: $VALUE_TYPE$) extends AnyVal&#10;" description="" toReformat="false" toShortenFQNames="true">
+    <variable name="NAME" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="VALUE" expression="" defaultValue="decapitalize(NAME)" alwaysStopAt="true" />
+    <variable name="VALUE_TYPE" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="SCALA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="eqFromUniversalEquals" value="implicit val $TYPE_VAL_NAME$Eq: cats.Eq[$TYPE_NAME$] = Eq.fromUniversalEquals" description="Eq.fromUniversalEquals" toReformat="false" toShortenFQNames="true">
+    <variable name="TYPE_VAL_NAME" expression="" defaultValue="decapitalize(TYPE_NAME)" alwaysStopAt="false" />
+    <variable name="TYPE_NAME" expression="" defaultValue="groovyScript(&quot;return _1.findAll { c -&gt; c != '$' }.join('');&quot;, className())" alwaysStopAt="false" />
+    <context>
+      <option name="SCALA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="showFromToString" value="implicit val $TYPE_VAL_NAME$Show: cats.Show[$TYPE_NAME$] = Show.fromToString" description="Show.fromToString" toReformat="false" toShortenFQNames="true">
+    <variable name="TYPE_VAL_NAME" expression="" defaultValue="decapitalize(TYPE_NAME)" alwaysStopAt="false" />
+    <variable name="TYPE_NAME" expression="" defaultValue="groovyScript(&quot;return _1.findAll { c -&gt; c != '$' }.join('');&quot;, className())" alwaysStopAt="false" />
+    <context>
+      <option name="SCALA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="showBy" value="implicit val $TYPE_VAL_NAME$Show: cats.Show[$TYPE_NAME$] = Show.show($SHOW_BY$)$END$" description="Show.show(A =&gt; String)" toReformat="false" toShortenFQNames="true">
+    <variable name="TYPE_VAL_NAME" expression="" defaultValue="decapitalize(TYPE_NAME)" alwaysStopAt="false" />
+    <variable name="TYPE_NAME" expression="" defaultValue="groovyScript(&quot;return _1.findAll { c -&gt; c != '$' }.join('');&quot;, className())" alwaysStopAt="false" />
+    <variable name="SHOW_BY" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="SCALA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="eqBy" value="implicit val $TYPE_VAL_NAME$Eq: cats.Eq[$TYPE_NAME$] = Eq.by($EQ_BY$)$END$" description="Eq.by(A =&gt; B)" toReformat="false" toShortenFQNames="true">
+    <variable name="TYPE_VAL_NAME" expression="" defaultValue="decapitalize(TYPE_NAME)" alwaysStopAt="false" />
+    <variable name="TYPE_NAME" expression="" defaultValue="groovyScript(&quot;return _1.findAll { c -&gt; c != '$' }.join('');&quot;, className())" alwaysStopAt="false" />
+    <variable name="EQ_BY" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="SCALA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="circeCaseClass" value="implicit val $TYPE_VAL_NAME$Codec: io.circe.Codec[$TYPE_NAME$] = io.circe.generic.semiauto.deriveCodec" description="" toReformat="false" toShortenFQNames="true">
+    <variable name="TYPE_VAL_NAME" expression="" defaultValue="decapitalize(TYPE_NAME)" alwaysStopAt="false" />
+    <variable name="TYPE_NAME" expression="" defaultValue="groovyScript(&quot;return _1.findAll { c -&gt; c != '$' }.join('');&quot;, className())" alwaysStopAt="false" />
+    <context>
+      <option name="SCALA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="applyImplicitly" value="def apply[F[*]: $TYPE_NAME$]: $TYPE_NAME$[F] = implicitly[$TYPE_NAME$[F]]" description="" toReformat="false" toShortenFQNames="true">
+    <variable name="TYPE_NAME" expression="" defaultValue="groovyScript(&quot;return _1.findAll { c -&gt; c != '$' }.join('');&quot;, className())" alwaysStopAt="false" />
+    <context>
+      <option name="SCALA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="renderBy" value="implicit val $TYPE_VAL_NAME$Render: extras.render.Render[$TYPE_NAME$] = Render.render($SHOW_BY$)$END$" description="Render.render(A =&gt; String)" toReformat="false" toShortenFQNames="true">
+    <variable name="TYPE_VAL_NAME" expression="" defaultValue="decapitalize(TYPE_NAME)" alwaysStopAt="false" />
+    <variable name="TYPE_NAME" expression="" defaultValue="groovyScript(&quot;return _1.findAll { c -&gt; c != '$' }.join('');&quot;, className())" alwaysStopAt="false" />
+    <variable name="SHOW_BY" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="SCALA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="renderDeriving" value="implicit val $TYPE_VAL_NAME$Render: extras.render.Render[$TYPE_NAME$] = deriving" description="" toReformat="false" toShortenFQNames="true">
+    <variable name="TYPE_VAL_NAME" expression="" defaultValue="decapitalize(TYPE_NAME)" alwaysStopAt="false" />
+    <variable name="TYPE_NAME" expression="" defaultValue="groovyScript(&quot;return _1.findAll { c -&gt; c != '$' }.join('');&quot;, className())" alwaysStopAt="false" />
+    <context>
+      <option name="SCALA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="renderFromToString" value="implicit val $TYPE_VAL_NAME$Render: extras.render.Render[$TYPE_NAME$] = Render.fromToString" description="Render.fromToString" toReformat="false" toShortenFQNames="true">
+    <variable name="TYPE_VAL_NAME" expression="" defaultValue="decapitalize(TYPE_NAME)" alwaysStopAt="false" />
+    <variable name="TYPE_NAME" expression="" defaultValue="groovyScript(&quot;return _1.findAll { c -&gt; c != '$' }.join('');&quot;, className())" alwaysStopAt="false" />
+    <context>
+      <option name="SCALA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="showDerivedByKittens" value="implicit val $TYPE_VAL_NAME$Show: cats.Show[$TYPE_NAME$] = cats.derived.semiauto.show$END$" description="cats.derived.semiauto.show" toReformat="false" toShortenFQNames="true">
+    <variable name="TYPE_VAL_NAME" expression="" defaultValue="decapitalize(TYPE_NAME)" alwaysStopAt="false" />
+    <variable name="TYPE_NAME" expression="" defaultValue="groovyScript(&quot;return _1.findAll { c -&gt; c != '$' }.join('');&quot;, className())" alwaysStopAt="false" />
+    <context>
+      <option name="SCALA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="extensionMethod" value="implicit class $TYPE_NAME$$SUFFIX$(private val $TYPE_VAL_NAME$: $TYPE_NAME$$OPTIONAL_TYPE_PARAM$) extends AnyVal {&#10;  $END$&#10;}" description="" toReformat="false" toShortenFQNames="true">
+    <variable name="SUFFIX" expression="" defaultValue="&quot;Ops&quot;" alwaysStopAt="true" />
+    <variable name="TYPE_NAME" expression="" defaultValue="groovyScript(&quot;return _1.findAll { c -&gt; c != '$' }.join('');&quot;, className())" alwaysStopAt="false" />
+    <variable name="TYPE_VAL_NAME" expression="" defaultValue="decapitalize(TYPE_NAME)" alwaysStopAt="false" />
+    <variable name="OPTIONAL_TYPE_PARAM" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="SCALA_CODE" value="true" />
+    </context>
+  </template>
+</templateSet>
