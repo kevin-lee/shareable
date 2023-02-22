@@ -1,0 +1,24 @@
+<templateSet group="scala3">
+  <template name="canEqual" value="given $TYPE_VAL_NAME$CanEqual: CanEqual[$TYPE_NAME$, $TYPE_NAME$] = CanEqual.derived" description="Scala 3 - CanEqual typeclass Instance" toReformat="false" toShortenFQNames="true">
+    <variable name="TYPE_VAL_NAME" expression="" defaultValue="decapitalize(TYPE_NAME)" alwaysStopAt="false" />
+    <variable name="TYPE_NAME" expression="" defaultValue="groovyScript(&quot;return _1.findAll { c -&gt; c != '$' }.join('');&quot;, className())" alwaysStopAt="false" />
+    <context>
+      <option name="SCALA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="opaque newtype" value="type $NEW_TYPE_NAME$ = $NEW_TYPE_NAME$.$NEW_TYPE_NAME$&#10;object $NEW_TYPE_NAME$ {&#10;  opaque type $NEW_TYPE_NAME$ = $TYPE_NAME$&#10;  def apply($PARAM_NAME$: $TYPE_NAME$): $NEW_TYPE_NAME$ = $PARAM_NAME$&#10;  &#10;  given $PARAM_NAME$CanEqual: CanEqual[$NEW_TYPE_NAME$, $NEW_TYPE_NAME$] = CanEqual.derived&#10;  &#10;  extension ($PARAM_NAME$: $NEW_TYPE_NAME$) {&#10;    def value: $TYPE_NAME$ = $PARAM_NAME$&#10;  }&#10;}&#10;" description="Scala 3 - newtype using opaque type" toReformat="false" toShortenFQNames="false">
+    <variable name="NEW_TYPE_NAME" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="TYPE_NAME" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="PARAM_NAME" expression="" defaultValue="decapitalize(NEW_TYPE_NAME)" alwaysStopAt="false" />
+    <context>
+      <option name="SCALA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="extensionMethodScala3" value="extension ($TYPE_VAL_NAME$: $TYPE_NAME$) {&#10;  $END$&#10;}" description="" toReformat="false" toShortenFQNames="true">
+    <variable name="TYPE_VAL_NAME" expression="" defaultValue="decapitalize(TYPE_NAME)" alwaysStopAt="false" />
+    <variable name="TYPE_NAME" expression="" defaultValue="groovyScript(&quot;return _1.findAll { c -&gt; c != '$' }.join('');&quot;, className())" alwaysStopAt="false" />
+    <context>
+      <option name="SCALA_CODE" value="true" />
+    </context>
+  </template>
+</templateSet>

@@ -1,0 +1,14 @@
+<templateSet group="scala3-fp">
+  <template name="circeCodecDerivation" value="given codec: io.circe.Codec[$TYPE_NAME$] = io.circe.Codec.AsObject.derived" description="Scala 3 - Codec.AsObject.derived" toReformat="false" toShortenFQNames="true">
+    <variable name="TYPE_NAME" expression="" defaultValue="groovyScript(&quot;return _1.findAll { c -&gt; c != '$' }.join('');&quot;, className())" alwaysStopAt="true" />
+    <context>
+      <option name="SCALA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="circeEncoderDecoderDerivation" value="given encoder: io.circe.Encoder[$TYPE_NAME$] = io.circe.Encoder.AsObject.derived&#10;given decoder: io.circe.Decoder[$TYPE_NAME$] = io.circe.Decoder.AsObject.derived" description="Scala 3 - AsObject.derived" toReformat="false" toShortenFQNames="true">
+    <variable name="TYPE_NAME" expression="" defaultValue="groovyScript(&quot;return _1.findAll { c -&gt; c != '$' }.join('');&quot;, className())" alwaysStopAt="true" />
+    <context>
+      <option name="SCALA_CODE" value="true" />
+    </context>
+  </template>
+</templateSet>
