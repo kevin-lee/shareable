@@ -153,11 +153,18 @@
       <option name="SCALA_CODE" value="true" />
     </context>
   </template>
-  <template name="extensionMethod" value="implicit class $TYPE_NAME$$SUFFIX$(private val $TYPE_VAL_NAME$: $TYPE_NAME$$OPTIONAL_TYPE_PARAM$) extends AnyVal {&#10;  $END$&#10;}" description="" toReformat="false" toShortenFQNames="true">
+  <template name="extensionMethod" value="implicit final class $TYPE_NAME$$SUFFIX$(private val $TYPE_VAL_NAME$: $TYPE_NAME$$OPTIONAL_TYPE_PARAM$) extends AnyVal {&#10;  $END$&#10;}" description="Extension methods in Scala 2" toReformat="false" toShortenFQNames="true">
     <variable name="SUFFIX" expression="" defaultValue="&quot;Ops&quot;" alwaysStopAt="true" />
     <variable name="TYPE_NAME" expression="" defaultValue="groovyScript(&quot;return _1.findAll { c -&gt; c != '$' }.join('');&quot;, className())" alwaysStopAt="false" />
     <variable name="TYPE_VAL_NAME" expression="" defaultValue="decapitalize(TYPE_NAME)" alwaysStopAt="false" />
     <variable name="OPTIONAL_TYPE_PARAM" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="SCALA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="pureconfigDeriveReader" value="implicit val $TYPE_VAL_NAME$ConfigReader: pureconfig.ConfigReader[$TYPE_NAME$] = pureconfig.generic.semiauto.deriveReader&#10;" description="pureconfig.generic.semiauto.deriveReader" toReformat="false" toShortenFQNames="true">
+    <variable name="TYPE_VAL_NAME" expression="" defaultValue="decapitalize(TYPE_NAME)" alwaysStopAt="false" />
+    <variable name="TYPE_NAME" expression="" defaultValue="groovyScript(&quot;return _1.findAll { c -&gt; c != '$' }.join('');&quot;, className())" alwaysStopAt="false" />
     <context>
       <option name="SCALA_CODE" value="true" />
     </context>
