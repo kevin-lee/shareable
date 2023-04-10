@@ -3,12 +3,11 @@
   "blocks": [
     {
       "alignment": "left",
-      "newline": true,
       "segments": [
         {
           "background": "#FEF5ED",
           "foreground": "#011627",
-          "leading_diamond": "\u256d\u2500\ue0b6",
+          "leading_diamond": "\n\u256d\u2500\ue0b6",
           "properties": {
             "macos": "\uf179 ",
             "ubuntu": "\uf31b ",
@@ -270,7 +269,7 @@
             "github_icon": "\uf7a3"
           },
           "style": "powerline",
-          "template": " {{ if .UpstreamURL }}{{ url .UpstreamIcon .UpstreamURL }} {{ end }}{{ .HEAD }}{{ .BranchStatus }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }} ",
+          "template": " {{ if .UpstreamURL }}{{ url .UpstreamIcon .UpstreamURL }} {{ end }}{{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }} ",
           "type": "git"
         }
       ],
