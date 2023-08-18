@@ -11,4 +11,11 @@
       <option name="SCALA_CODE" value="true" />
     </context>
   </template>
+  <template name="showDerivedByKittens (Scala 3)" value="given $TYPE_VAL_NAME$Show: cats.Show[$TYPE_NAME$] = cats.derived.semiauto.show$END$" description="Scala 3 - cats.derived.semiauto.show" toReformat="false" toShortenFQNames="true">
+    <variable name="TYPE_VAL_NAME" expression="" defaultValue="decapitalize(TYPE_NAME)" alwaysStopAt="false" />
+    <variable name="TYPE_NAME" expression="" defaultValue="groovyScript(&quot;return _1.findAll { c -&gt; c != '$' }.join('');&quot;, className())" alwaysStopAt="false" />
+    <context>
+      <option name="SCALA_CODE" value="true" />
+    </context>
+  </template>
 </templateSet>
